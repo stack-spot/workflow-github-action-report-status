@@ -26,6 +26,20 @@ inputs:
   realm:
     description: "Realm StackSpot"
     required: true
+  name:
+    description: "Realm StackSpot"
+    required: true
   status:
     description: "Status of execution"
+    required: true
+  conclusion:
+    description: "Status of execution"
     required: false
+  idm-base-url:
+    description: "StackSpot IDM base url"
+    required: false
+    default: "https://idm.stackspot.com"
+  workflow-api-base-url:
+    description: "Workflow API base url"
+    required: false
+    default: "https://workflow-api.v1.stackspot.com"
