@@ -1,0 +1,31 @@
+name: "StackSpot Workflow Report Status"
+description: 'StackSpot Workflow Report Status'
+author: "StackSpot"
+branding:
+  icon: "truck"
+  color: "purple"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.execution-id }}
+    - ${{ inputs.client-id }}
+    - ${{ inputs.client-secret }}
+    - ${{ inputs.realm }}
+    - ${{ inputs.status }}
+inputs:
+  execution-id:
+    description: "Execution ID"
+    required: true
+  client-id:
+    description: "Client ID StackSpot"
+    required: true
+  client-secret:
+    description: "Client Secret StackSpot"
+    required: true
+  realm:
+    description: "Realm StackSpot"
+    required: true
+  status:
+    description: "Status of execution"
+    required: false
