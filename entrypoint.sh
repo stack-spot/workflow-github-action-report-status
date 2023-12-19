@@ -30,7 +30,7 @@ if [[ "$status" -ne "pending" ]]; then
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
     --data "{\"name\": \"$name\", \"status\": \"$status\"}";)
-if [[ "$status" -ne "completed" ]]; then
+elif [[ "$status" -ne "completed" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
