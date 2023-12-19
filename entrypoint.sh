@@ -24,18 +24,24 @@ secret_stk_login=$(curl --location --request POST "$idm_service" \
     --data-urlencode "grant_type=client_credentials" \
     --data-urlencode "client_secret=$client_secret" | jq -r .access_token)
 
-if [[ "" -ne "completed" ]]; then
+if [[ "$status" -ne "pending" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
-    --data "{\"name\": \"$status\", \"started_at\": \"$started_at\", \"completed_at\": \"$completed_at\", \"conclusion\": \"$conclusion\"}";)
-else
+    --data "{\"name\": \"$name\", \"status\": \"$status\"}";)
+if [[ "$status" -ne "completed" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
     --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\"}";)
+else
+    http_code=$(curl -s -o response.txt -w '%{http_code}' \
+    --location --request PUT "$workflow_service" \
+    --header "Authorization: Bearer $secret_stk_login" \
+    --header 'Content-Type: application/json' \
+    --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\", \"completed_at\": \"$completed_at\", \"conclusion\": \"$conclusion\"}";)
 fi
 
 if [[ "$http_code" -ne "200" ]]; then
