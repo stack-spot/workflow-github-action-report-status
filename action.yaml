@@ -12,7 +12,11 @@ runs:
     - ${{ inputs.client-id }}
     - ${{ inputs.client-secret }}
     - ${{ inputs.realm }}
+    - ${{ inputs.name }}
     - ${{ inputs.status }}
+    - ${{ inputs.conclusion }}
+    - ${{ inputs.idm-base-url }}
+    - ${{ inputs.workflow-api-base-url }}
 inputs:
   execution-id:
     description: "Execution ID"
