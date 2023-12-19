@@ -24,13 +24,13 @@ secret_stk_login=$(curl --location --request POST "$idm_service" \
     --data-urlencode "grant_type=client_credentials" \
     --data-urlencode "client_secret=$client_secret" | jq -r .access_token)
 
-if [[ "$status" -e "pending" ]]; then
+if [[ "$status" == "pending" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
     --data "{\"name\": \"$name\", \"status\": \"$status\"}";)
-elif [[ "$status" -e "completed" ]]; then
+elif [[ "$status" == "completed" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
