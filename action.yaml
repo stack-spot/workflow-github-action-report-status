@@ -33,7 +33,7 @@ inputs:
     description: "Status of execution"
     required: true
   conclusion:
-    description: "Status of execution"
+    description: "Conclusion of execution"
     required: false
   idm-base-url:
     description: "StackSpot IDM base url"
