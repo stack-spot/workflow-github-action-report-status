@@ -15,6 +15,9 @@ completed_at=$(date +"%Y-%m-%d %T%z");
 workflow_service="$workflow_url/executions/$execution_id/workflows/steps"
 idm_service="$idm_url/realms/$realm/protocol/openid-connect/token"
 
+echo $workflow_service
+echo $idm_service
+
 secret_stk_login=$(curl --location --request POST "$idm_service" \
     --header "Content-Type: application/x-www-form-urlencoded" \
     --data-urlencode "client_id=$client_id" \
