@@ -18,7 +18,7 @@ inputs:
     description: "Realm StackSpot"
     required: true
   name:
-    description: "Realm StackSpot"
+    description: "Name of workflow step of status report"
     required: true
   status:
     description: "Status of execution"
