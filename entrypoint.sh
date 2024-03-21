@@ -1,14 +1,15 @@
 #!/bin/bash -l
 
-execution_id=$1
-client_id=$2
-client_secret=$3
-realm=$4
-name=$5
-status=$6
+execution_id=$1;
+client_id=$2;
+client_secret=$3;
+realm=$4;
+name=$5;
+status=$6;
 conclusion=$7;
-idm_url=$8
-workflow_url=$9;
+log=$8;
+idm_url=$9;
+workflow_url=$10;
 started_at=$(date +"%Y-%m-%d %T%z");
 completed_at=$(date +"%Y-%m-%d %T%z");
 
@@ -29,19 +30,19 @@ if [[ "$status" == "pending" ]]; then
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
-    --data "{\"name\": \"$name\", \"status\": \"$status\"}";)
+    --data "{\"name\": \"$name\", \"status\": \"$status\", \"log\": \"$log\"}";)
 elif [[ "$status" == "completed" ]]; then
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
-    --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\", \"completed_at\": \"$completed_at\", \"conclusion\": \"$conclusion\"}";)
+    --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\", \"completed_at\": \"$completed_at\", \"conclusion\": \"$conclusion\", \"log\": \"$log\"}";)
 else
     http_code=$(curl -s -o response.txt -w '%{http_code}' \
     --location --request PUT "$workflow_service" \
     --header "Authorization: Bearer $secret_stk_login" \
     --header 'Content-Type: application/json' \
-    --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\"}";)
+    --data "{\"name\": \"$name\", \"status\": \"$status\", \"started_at\": \"$started_at\", \"log\": \"$log\"}";)
 fi
 
 if [[ "$http_code" -ne "200" ]]; then

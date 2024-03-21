@@ -15,6 +15,7 @@ runs:
     - ${{ inputs.name }}
     - ${{ inputs.status }}
     - ${{ inputs.conclusion }}
+    - ${{ inputs.log }}
     - ${{ inputs.idm-base-url }}
     - ${{ inputs.workflow-api-base-url }}
 inputs:
@@ -39,6 +40,10 @@ inputs:
   conclusion:
     description: "Conclusion of execution"
     required: false
+  log:
+    description: "Step log"
+    required: false
+    default: ""
   idm-base-url:
     description: "StackSpot IDM base url"
     required: false
