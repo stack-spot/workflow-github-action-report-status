@@ -25,8 +25,7 @@ on:
 
 jobs:
   stackspot-workflow:
-    environment: 'prd'
-    runs-on: ${{ vars.ACTION_RUNNER }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
