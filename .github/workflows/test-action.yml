@@ -3,18 +3,30 @@ name: Use StackSpot Workflow Report Status
 on:
   workflow_dispatch:
     inputs:
+      name:
+        required: false
+        default: Smoke test
       execution-id:
         required: true
       status:
         type: choice
         options:
-          - started
-          - finished
+          - in_progress
+          - pending
+          - completed
+      conclusion:
+        required: false
+        type: choice
+        options:
+          - success
+          - failure
+      log:
+        required: False
+        default: ""
 
 jobs:
   stackspot-workflow:
-    environment: 'prd'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,7 +35,10 @@ jobs:
         uses: ./
         with:
           execution-id: "${{ github.event.inputs.execution-id }}"
+          name: ${{ github.event.inputs.name }}
           client-id: "${{ secrets.CLIENT_ID }}"
           client-secret: "${{ secrets.CLIENT_SECRET }}"
           realm: "${{ vars.REALM }}"
           status: "${{ github.event.inputs.status }}"
+          conclusion: "${{ github.event.inputs.conclusion }}"
+          log: "${{ github.event.inputs.log }}"

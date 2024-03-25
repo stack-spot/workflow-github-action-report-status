@@ -26,6 +26,10 @@ inputs:
   conclusion:
     description: "Conclusion of execution"
     required: false
+  log:
+    description: "Step log"
+    required: false
+    default: ""
   idm-base-url:
     description: "StackSpot IDM base url"
     required: false
@@ -38,5 +42,5 @@ runs:
   using: "composite"
   steps:
     - shell: bash
-      run: 
-        ${{ github.action_path }}/entrypoint.sh "${{ inputs.execution-id }}" "${{ inputs.client-id }}" "${{ inputs.client-secret }}" "${{ inputs.realm }}" "${{ inputs.name }}" "${{ inputs.status }}" "${{ inputs.conclusion }}" "${{ inputs.idm-base-url }}" "${{ inputs.workflow-api-base-url }}"
+      run:
+        ${{ github.action_path }}/entrypoint.sh "${{ inputs.execution-id }}" "${{ inputs.client-id }}" "${{ inputs.client-secret }}" "${{ inputs.realm }}" "${{ inputs.name }}" "${{ inputs.status }}" "${{ inputs.conclusion }}" "${{ inputs.log }}" "${{ inputs.idm-base-url }}" "${{ inputs.workflow-api-base-url }}"
