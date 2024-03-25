@@ -4,20 +4,6 @@ author: "StackSpot"
 branding:
   icon: "truck"
   color: "purple"
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.execution-id }}
-    - ${{ inputs.client-id }}
-    - ${{ inputs.client-secret }}
-    - ${{ inputs.realm }}
-    - ${{ inputs.name }}
-    - ${{ inputs.status }}
-    - ${{ inputs.conclusion }}
-    - ${{ inputs.log }}
-    - ${{ inputs.idm-base-url }}
-    - ${{ inputs.workflow-api-base-url }}
 inputs:
   execution-id:
     description: "Execution ID"
@@ -32,7 +18,7 @@ inputs:
     description: "Realm StackSpot"
     required: true
   name:
-    description: "Realm StackSpot"
+    description: "Name of workflow step of status report"
     required: true
   status:
     description: "Status of execution"
@@ -52,3 +38,9 @@ inputs:
     description: "Workflow API base url"
     required: false
     default: "https://workflow-api.v1.stackspot.com"
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run:
+        ${{ github.action_path }}/entrypoint.sh "${{ inputs.execution-id }}" "${{ inputs.client-id }}" "${{ inputs.client-secret }}" "${{ inputs.realm }}" "${{ inputs.name }}" "${{ inputs.status }}" "${{ inputs.conclusion }}" "${{ inputs.log }}" "${{ inputs.idm-base-url }}" "${{ inputs.workflow-api-base-url }}"

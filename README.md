@@ -12,6 +12,7 @@ This action execute StackSpot Workflow Report Status
     client-id: "${{ secrets.CLIENT_ID }}"
     client-secret: "${{ secrets.CLIENT_SECRET }}"
     realm: "${{ secrets.REALM }}"
+    name: "Custom step name"
     status: "started"
     
 - name: Logs CLI
@@ -35,5 +36,6 @@ This action execute StackSpot Workflow Report Status
     client-id: "${{ secrets.CLIENT_ID }}"
     client-secret: "${{ secrets.CLIENT_SECRET }}"
     realm: "${{ secrets.REALM }}"
+    name: "Custom step name"
     status: "finished"
 ```
