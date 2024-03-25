@@ -19,7 +19,7 @@ idm_service="$idm_url/realms/$realm/protocol/openid-connect/token"
 echo $workflow_service
 echo $idm_service
 
-secret_stk_login=$(curl --location --request POST "$idm_service" \
+secret_stk_login=$(curl -s -o response.txt -w '%{http_code}' --location --request POST "$idm_service" \
     --header "Content-Type: application/x-www-form-urlencoded" \
     --data-urlencode "client_id=$client_id" \
     --data-urlencode "grant_type=client_credentials" \
